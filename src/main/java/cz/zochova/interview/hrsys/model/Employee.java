@@ -28,6 +28,14 @@ public class Employee implements Serializable {
     public Employee() {
     }
 
+    public Employee(Long id, String firstName, String lastName, int age, JobPosition jobPosition) {
+        this.employeeId = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.jobPosition = jobPosition;
+    }
+
     public String getFirstName() {
         return firstName;
     }
