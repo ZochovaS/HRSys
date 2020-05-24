@@ -21,3 +21,9 @@ The employee should have attributes:
 
 ##### Prerequisites
 * Java 11
+
+##### Setting up Database
+1. download [HSQLDB](https://sourceforge.net/projects/hsqldb/files/)
+2. copy *data* folder from source code into the main folder of hsqldb you have just installed
+3. open command prompt from main hsqldb folder and run 
+> java -cp ./lib/hsqldb.jar org.hsqldb.server.Server --database.0 file:data/hrsysdb --dbname.0 hrsys
