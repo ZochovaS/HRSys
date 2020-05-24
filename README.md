@@ -27,3 +27,6 @@ The employee should have attributes:
 2. copy *data* folder from source code into the main folder of hsqldb you have just installed
 3. open command prompt from main hsqldb folder and run 
 > java -cp ./lib/hsqldb.jar org.hsqldb.server.Server --database.0 file:data/hrsysdb --dbname.0 hrsys
+
+##### System limitations
+Currently there is no possibility to save two employees which have same first name, last name and age
