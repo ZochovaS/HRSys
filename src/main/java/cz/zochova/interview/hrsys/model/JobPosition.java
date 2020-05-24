@@ -1,4 +1,4 @@
-package cz.zochova.interview.HRSys.model;
+package cz.zochova.interview.hrsys.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
