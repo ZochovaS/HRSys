@@ -1,10 +1,15 @@
 package cz.zochova.interview.hrsys.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"FIRST_NAME", "LAST_NAME", "AGE"}))
 public class Employee implements Serializable {
     private static final long serialVersionUID = 123533551001L;
 
@@ -13,12 +18,18 @@ public class Employee implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long employeeId;
 
+    @NotEmpty(message = "Employee first name cannot be empty.")
+    @Size(max = 100, message = "Employee first name is too long. Cannot exceed 100 chars.")
     @Column(name = "FIRST_NAME")
     private String firstName;
 
+    @NotEmpty(message = "Employee last name cannot be empty.")
+    @Size(max = 100, message = "Employee last name is too long. Cannot exceed 100 chars.")
     @Column(name = "LAST_NAME")
     private String lastName;
 
+    @Min(1)
+    @Max(200)
     private int age;
 
     @ManyToOne

@@ -5,10 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"POSITION_NAME"}))
 public class JobPosition implements Serializable {
     private static final long serialVersionUID = 567880771001L;
 
@@ -17,6 +22,8 @@ public class JobPosition implements Serializable {
     @Column(name = "JOB_POSITION_ID")
     private long jobPositionId;
 
+    @NotEmpty(message = "Position name cannot be empty.")
+    @Size(max = 100, message = "Position name is too long. Cannot exceed 100 chars.")
     @Column(name = "POSITION_NAME")
     private String positionName;
 
