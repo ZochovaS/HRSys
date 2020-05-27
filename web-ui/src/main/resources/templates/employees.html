@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/style.css" th:href="@{'/css/style.css'}" />
+    <meta charset="UTF-8">
+    <title>HR System</title>
+</head>
+<body>
+    <h1>List of Employees</h1>
+    <div>
+        <tr>
+            <a href="/HRsystem/employee-add">Add new employee</a>
+            <a href="/HRsystem/employee-report">Show employee report</a>
+        </tr>
+    </div>
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <td>First name</td>
+                <td>Last name</td>
+                <td>Age</td>
+                <td>Job Position</td>
+                <td>Action</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="employee : ${employees}" th:id="*{employeeId}" th:object="${employee}">
+                <td th:text="*{firstName}"></td>
+                <td th:text="*{lastName}"></td>
+                <td th:text="*{age}"></td>
+                <td th:text="*{jobPosition.getPositionName()}"></td>
+                <td>
+                    <form th:id="'management-form-' + ${employee.employeeId}" action="HRsystem" th:action="@{/HRsystem}" method="post">
+                        <input type="hidden" name="employeeId" th:value="${employee.employeeId}">
+                    </form>
+                    <div class="inside-cell-flex">
+                        <button class="manage-button" th:form="'management-form-' + ${employee.employeeId}" name="delete_emp">Delete</button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
