@@ -2,6 +2,7 @@ package cz.zochova.interview.hrsys.service;
 
 import cz.zochova.interview.hrsys.dto.EmployeeDTO;
 import cz.zochova.interview.hrsys.dto.JobPositionDTO;
+import cz.zochova.interview.hrsys.dto.EmployeeReportDTO;
 import cz.zochova.interview.hrsys.model.Employee;
 import cz.zochova.interview.hrsys.model.JobPosition;
 import cz.zochova.interview.hrsys.repository.EmployeeRepository;
@@ -37,6 +38,7 @@ public class DefaultEmployeeService implements EmployeeService{
         mapperFactory.classMap(Employee.class, EmployeeDTO.class);
         mapperFactory.classMap(JobPosition.class, JobPositionDTO.class);
         mapper = mapperFactory.getMapperFacade();
+        LOGGER.info("DefaultEmployeeService is instantiated");
     }
 
     @Override
@@ -83,5 +85,21 @@ public class DefaultEmployeeService implements EmployeeService{
         Employee employeeInPersistenceContext = employeeRepository.findById(employee.getEmployeeId())
                 .orElseThrow(() -> new NoSuchElementException("Employee to delete does not exist in database."));
         employeeRepository.delete(employeeInPersistenceContext);
+    }
+
+    @Transactional
+    @Override
+    public void remove(Long employeeId) {
+        if (employeeId == null){
+            throw new IllegalArgumentException("EmployeeId to remove cannot be null.");
+        }
+        Employee employeeInPersistenceContext = employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new NoSuchElementException("Employee to delete does not exist in database."));
+        employeeRepository.delete(employeeInPersistenceContext);
+    }
+
+    @Override
+    public List<EmployeeReportDTO> getCountPerPositionTable() {
+        return employeeRepository.getCountPerPositionTable();
     }
 }

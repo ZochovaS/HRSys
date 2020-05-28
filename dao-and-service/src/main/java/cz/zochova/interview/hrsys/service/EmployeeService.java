@@ -1,6 +1,7 @@
 package cz.zochova.interview.hrsys.service;
 
 import cz.zochova.interview.hrsys.dto.EmployeeDTO;
+import cz.zochova.interview.hrsys.dto.EmployeeReportDTO;
 import cz.zochova.interview.hrsys.model.Employee;
 import cz.zochova.interview.hrsys.service.exception.EmployeeNotSavedException;
 
@@ -15,4 +16,8 @@ public interface EmployeeService {
     Employee add(EmployeeDTO employeeDTO) throws EmployeeNotSavedException;
 
     void remove(EmployeeDTO employeeDTO);
+
+    void remove(Long employeeId);
+
+    List<EmployeeReportDTO> getCountPerPositionTable();
 }

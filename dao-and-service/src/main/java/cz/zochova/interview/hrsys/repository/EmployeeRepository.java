@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+public interface EmployeeRepository extends JpaRepository<Employee, Long>, EmployeeRepositoryCustom {
 
     @Query("select e from Employee e where lower(e.lastName) like lower(?1) order by e.lastName asc")
     List<Employee> findByLastName(String lastNamePart);

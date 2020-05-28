@@ -1,5 +1,7 @@
 package cz.zochova.interview.hrsys.model;
 
+import cz.zochova.interview.hrsys.dto.EmployeeReportDTO;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -8,6 +10,11 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Objects;
 
+@SqlResultSetMapping(name = "EmployeeReportResult", classes = {
+        @ConstructorResult(targetClass = EmployeeReportDTO.class, columns = {
+                @ColumnResult(name = "POSITION"),
+                @ColumnResult(name = "COUNT_OF_EMPLOYEES", type = int.class),
+                @ColumnResult(name = "AVERAGE_AGE", type = int.class)})})
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"FIRST_NAME", "LAST_NAME", "AGE"}))
 public class Employee implements Serializable {
