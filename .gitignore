@@ -32,3 +32,6 @@ build/
 
 ### Database ###
 hsqldb-2.5.0/
+
+### Do not ignore sample data folder ###
+!data/*
